@@ -11,7 +11,7 @@ public interface GoodsMapper {
 
 	// mapper.xml의 resultType, id, (parameterType) 그대로
 	public List<GoodsDTO> goodsList(String gCategory);
-	public GoodsDTO goodsRetrieve(String gCode);
+	public GoodsDTO goodsDetail(String gCode);
 	
 	
 }

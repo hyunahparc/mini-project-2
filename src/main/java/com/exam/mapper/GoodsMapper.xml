@@ -20,7 +20,7 @@
   	</select>
   	
   	<!-- 상품 자세히 보기 -->
-  	<select id="goodsRetrieve" parameterType="string" resultType="GoodsDTO">
+  	<select id="goodsDetail" parameterType="string" resultType="GoodsDTO">
   		select gCode,
   			   gCategory,
   			   gName,

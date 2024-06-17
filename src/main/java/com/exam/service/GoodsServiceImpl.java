@@ -23,8 +23,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public GoodsDTO goodsRetrieve(String gCode) {
-		return goodsMapper.goodsRetrieve(gCode);
+	public GoodsDTO goodsDetail(String gCode) {
+		return goodsMapper.goodsDetail(gCode);
 	}
 
 }
