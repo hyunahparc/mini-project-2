@@ -10,7 +10,7 @@ import com.exam.mapper.GoodsMapper;
 @Service
 public class GoodsServiceImpl implements GoodsService {
 	
-	// GoodsMapper 접근 (Servlet에서 GoodsDAO 역할)
+	// GoodsMapper 주입 (Servlet에서 GoodsDAO 역할)
 	GoodsMapper goodsMapper;
 	
 	public GoodsServiceImpl(GoodsMapper goodsMapper) {

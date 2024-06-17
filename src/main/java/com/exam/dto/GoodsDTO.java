@@ -11,20 +11,19 @@ public class GoodsDTO {
 	String gCode;
 	String gCategory;
 	String gName;
-	String gContent;
 	int gPrice;
 	String gImage;
+	int gStock;
 	
 	public GoodsDTO() {	}
 
-	public GoodsDTO(String gCode, String gCategory, String gName, String gContent, int gPrice, String gImage) {
-		super();
+	public GoodsDTO(String gCode, String gCategory, String gName, int gPrice, String gImage, int gStock) {
 		this.gCode = gCode;
 		this.gCategory = gCategory;
 		this.gName = gName;
-		this.gContent = gContent;
 		this.gPrice = gPrice;
 		this.gImage = gImage;
+		this.gStock = gStock;
 	}
 
 	public String getgCode() {
@@ -51,14 +50,6 @@ public class GoodsDTO {
 		this.gName = gName;
 	}
 
-	public String getgContent() {
-		return gContent;
-	}
-
-	public void setgContent(String gContent) {
-		this.gContent = gContent;
-	}
-
 	public int getgPrice() {
 		return gPrice;
 	}
@@ -75,10 +66,20 @@ public class GoodsDTO {
 		this.gImage = gImage;
 	}
 
+	public int getgStock() {
+		return gStock;
+	}
+
+	public void setgStock(int gStock) {
+		this.gStock = gStock;
+	}
+
 	@Override
 	public String toString() {
-		return "GoodsDTO [gCode=" + gCode + ", gCategory=" + gCategory + ", gName=" + gName + ", gContent=" + gContent
-				+ ", gPrice=" + gPrice + ", gImage=" + gImage + "]";
+		return "GoodsDTO [gCode=" + gCode + ", gCategory=" + gCategory + ", gName=" + gName + ", gPrice=" + gPrice
+				+ ", gImage=" + gImage + ", gStock=" + gStock + "]";
 	}
-	
+
+
+
 }
