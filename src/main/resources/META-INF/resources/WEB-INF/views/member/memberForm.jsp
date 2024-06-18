@@ -11,9 +11,9 @@
 		$("#passwd2").on("keyup", function() {
 			var passwd = $("#passwd").val();
 			var passwd2 = $("#passwd2").val();
-			var mesg = "비번일치";
+			var mesg = "비밀번호가 일치합니다.";
 			if (passwd != passwd2) {
-				mesg = "비번 불일치";
+				mesg = "비밀번호가 일치하지 않습니다.";
 			}
 			$("#pwdcheck").text(mesg);
 		});//end 비번 확인
@@ -48,6 +48,11 @@
 		}); */
 
 	});// ready()
+	
+	
+	
+	
+		});
 </script>
 
 <div class="container">
@@ -142,22 +147,27 @@
 				<label for="xxx" class="visually-hidden">@</label> <span>@</span>
 			</div>
 			<div class="col-auto">
-				<label for="email2" class="visually-hidden">이메일2</label> <input
-					type="text" name="email2" class="form-control" id="email2"
+				<label for="email2" class="visually-hidden">이메일2</label> 
+				<input type="text" name="email2" class="form-control" id="email2"
 					placeholder="직접입력">
 			</div>
 			<label for="email3" class="visually-hidden">이메일2</label>
 			<div class="col-auto">
-				<select name="email3" class="form-control" id="email3">
+				<select name="email3" class="form-control" id="email3"
+					onchange="handleOnChange(this)">
+					<option value="none">--선택하세요--</option>
 					<option value="daum.net">daum.net</option>
 					<option value="google.com">google.com</option>
 					<option value="naver.com">naver.com</option>
+					<option value="self">직접입력</option>
 				</select>
+				<div id='result'></div>
+				
 			</div>
 		</div>
 		<div class="col-12">
-			<button type="submit" class="btn btn-primary">Sign in</button>
-			<button type="reset" class="btn btn-primary">cancel</button>
+			<button type="submit" class="btn btn-primary">가입하기</button>
+			<button type="reset" class="btn btn-primary">취소</button>
 		</div>
 	</form:form>
 
