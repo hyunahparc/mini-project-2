@@ -12,9 +12,9 @@
   		select gCode,
   			   gCategory,
   			   gName,
-  			   gContent,
   			   gPrice,
-  			   gImage
+  			   gImage,
+  			   gStock
   		from goods
   		where gCategory = #{gCategory}
   	</select>
@@ -24,9 +24,9 @@
   		select gCode,
   			   gCategory,
   			   gName,
-  			   gContent,
   			   gPrice,
-  			   gImage
+  			   gImage,
+  			   gStock
   		from goods
   		where gCode = #{gCode}
   	</select>

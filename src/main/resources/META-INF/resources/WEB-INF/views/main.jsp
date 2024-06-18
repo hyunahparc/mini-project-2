@@ -23,9 +23,7 @@ footer {
 	height: 40px;
 }
 </style>
-<link rel="stylesheet"
-	href="webjars/bootstrap/5.3.3/css/bootstrap.min.css">
-</script>
+<link rel="stylesheet"	href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"></script>
 <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>

@@ -25,11 +25,10 @@ public class MainController {
 		this.goodsService = goodsService;
 	}
 
-	// category 정하지 않았을 때는 top 보여준다
-	// required 디폴트가 true라서 null이 와도 될 수 있게 false로 준 것
-	// null 일 경우 top을 보여준다
+	// category 정하지 않았을 때(null) 기본값 top
+	// required 디폴트가 true라서 null이 와도 될 수 있게 false 지정
 	@GetMapping("/main")
-	public String main(@RequestParam(required = false, defaultValue = "top") String gCategory
+	public String main(@RequestParam(required = false, defaultValue = "jelly") String gCategory
 			, ModelMap m) {
 		
 		// ModelMap을 만들고 goodsList에 저장해서 main.jsp로 보내줌 
