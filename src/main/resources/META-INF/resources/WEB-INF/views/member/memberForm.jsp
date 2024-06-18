@@ -37,21 +37,20 @@
 					console.log("error:", error);
 				}
 
-			});
-		}); // id 중복 체크
+			});// id 중복 체크
 
-/* 		// 회원가입 서브밋
-		$("form").on("submit", function() {
-			alert("form submit");
-			this.action = "MemberAddServlet"; //MemberAddServlet의 맵핑값
-			this.method = "post";
-		}); */
+		});
+		const $domainList = $('#emailList');
+		const $domainInput = $('#emailText');
 
-	});// ready()
-	
-	
-	
-	
+		$domainList.on('change', function() {
+			if ($(this).val() !== "self") {
+				$domainInput.val($(this).val()).prop('disabled', true);
+			} else {
+				$domainInput.val("").prop('disabled', false);
+			}
+		});
+	});
 </script>
 
 <div class="container">
@@ -61,7 +60,7 @@
 		<div class="row mb-3">
 			<label for="userid" class="col-sm-2 col-form-label">*아이디</label>
 			<div class="col-auto">
-				<form:input type="text" class="form-control" path="userid"/>
+				<form:input type="text" class="form-control" path="userid" />
 			</div>
 			<div class="col-auto">
 				<button type="button" class="btn btn-primary mb-3"
@@ -74,7 +73,7 @@
 		<div class="row mb-3">
 			<label for="password" class="col-sm-2 col-form-label">*비밀번호</label>
 			<div class="col-auto">
-				<form:input type="password" class="form-control" path="passwd"/>
+				<form:input type="password" class="form-control" path="passwd" />
 				<form:errors path="passwd"></form:errors>
 			</div>
 		</div>
@@ -91,7 +90,7 @@
 		<div class="row mb-3">
 			<label for="username" class="col-sm-2 col-form-label">이름</label>
 			<div class="col-auto">
-				<form:input type="text" class="form-control" path="username"/>
+				<form:input type="text" class="form-control" path="username" />
 			</div>
 		</div>
 		<hr>
@@ -147,19 +146,18 @@
 			</div>
 			<div class="col-auto">
 				<label for="email2" class="visually-hidden">이메일2</label> 
-				<input type="text" name="email2" class="form-control" id="email2"
+					<input type="text" name="email2" class="form-control" id="emailText"
 					placeholder="직접입력">
 			</div>
-			<label for="email3" class="visually-hidden">이메일2</label>
+			<label for="email2" class="visually-hidden">이메일2</label>
 			<div class="col-auto">
-				<select name="email3" class="form-control" id="email3"
-					>
+				<select name="email2" class="form-control" id="emailList">
 					<option value="self">직접입력</option>
-					<option value="daum.net">daum.net</option>
-					<option value="google.com">google.com</option>
 					<option value="naver.com">naver.com</option>
+					<option value="google.com">google.com</option>
+					<option value="daum.net">daum.net</option>
 				</select>
-				
+
 			</div>
 		</div>
 		<div class="col-12">

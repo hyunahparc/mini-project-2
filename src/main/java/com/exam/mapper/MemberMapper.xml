@@ -15,9 +15,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="memberAdd" parameterType="MemberDTO">
-		insert into member (userid,passwd,username,post,addr1,addr2,
-		phone1, phone2, phone3, email1, email2
-		)
+		insert into member (userid, passwd, username, post, addr1, addr2,
+		phone1, phone2, phone3, email1, email2)
 		values(#{userid},#{passwd},#{username},#{post},#{addr1},#{addr2},
 		#{phone1},#{phone2},#{phone3},#{email1},#{email2})
 
