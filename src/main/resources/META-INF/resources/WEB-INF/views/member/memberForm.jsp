@@ -161,7 +161,6 @@
 					<option value="naver.com">naver.com</option>
 					<option value="self">직접입력</option>
 				</select>
-				<div id='result'></div>
 				
 			</div>
 		</div>
