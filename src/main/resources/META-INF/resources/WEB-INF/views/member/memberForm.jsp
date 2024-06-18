@@ -52,7 +52,6 @@
 	
 	
 	
-		});
 </script>
 
 <div class="container">
@@ -154,12 +153,11 @@
 			<label for="email3" class="visually-hidden">이메일2</label>
 			<div class="col-auto">
 				<select name="email3" class="form-control" id="email3"
-					onchange="handleOnChange(this)">
-					<option value="none">--선택하세요--</option>
+					>
+					<option value="self">직접입력</option>
 					<option value="daum.net">daum.net</option>
 					<option value="google.com">google.com</option>
 					<option value="naver.com">naver.com</option>
-					<option value="self">직접입력</option>
 				</select>
 				
 			</div>
