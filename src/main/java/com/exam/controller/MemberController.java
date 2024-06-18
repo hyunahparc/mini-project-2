@@ -66,7 +66,7 @@ public class MemberController{
 		int n = memberService.memberAdd(dto);
 		
 		
-		return "redirect:main";
+		return "redirect:loginForm";
 	}
 	
 	@GetMapping("mypage")
