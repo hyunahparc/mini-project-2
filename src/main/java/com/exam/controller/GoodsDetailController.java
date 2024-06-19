@@ -16,7 +16,7 @@ public class GoodsDetailController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	// GoodsService 주입해서 연동시키기 (생성자로)
+	// GoodsService 주입해서 연동시키기 (생성자로)qqqqq
 	GoodsService goodsService;
 
 	public GoodsDetailController(GoodsService goodsService) {
