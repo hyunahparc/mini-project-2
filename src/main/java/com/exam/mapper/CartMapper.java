@@ -15,4 +15,14 @@ public interface CartMapper {
 	
 	// 장바구니 목록 보기 (조인 사용??)
 	public List<CartDTO> cartList(String userid); 
+	
+	
+	
+//	<!-- 장바구니 목록 보기 -->
+//	<select id="cartList" parameterType="string" resultMap="yyy">
+//		select *
+//		from cart join goods on cart.gCode = goods.gCode
+//		where userid=#{userid}
+//	</select>
+	
 }
