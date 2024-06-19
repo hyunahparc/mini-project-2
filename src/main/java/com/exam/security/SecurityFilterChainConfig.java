@@ -14,11 +14,11 @@ public class SecurityFilterChainConfig {
 		// 커스터마이징 처리
 
 		// 1. 불필요한 인증 제거
-		http.authorizeRequests().antMatchers("/goodsDetail*","/login","/main", "/signup", "/webjars/**", "/images/**","/idCheck").permitAll()
+		http.authorizeRequests().antMatchers("/goodsDetail*","/login","/main", "/signup", "/webjars/**", "/images/**","/idCheck","/mypage/**","/js/**").permitAll()
 				// matchers 안에 있는애들은 다 허용하겠다는 뜻
 				.anyRequest()
 				.authenticated().and().csrf()
-			.ignoringAntMatchers("/member/signup")
+				.ignoringAntMatchers("/member/signup")
 		    	.ignoringAntMatchers("/member/login");
 
 		// 2. 로그인 관련 작업
@@ -28,7 +28,7 @@ public class SecurityFilterChainConfig {
 			.usernameParameter("userid") // <input name = " userid" username이 이름이 아니고 id(식별자)임
 			.passwordParameter("passwd")	
 			.failureForwardUrl("/login_fail") // 로그인 실패시 리다이렉트되는 요청맵핑값
-			.defaultSuccessUrl("/login_success",true); // 성공시 리다이렉트되는 요청맵핑값
+			.defaultSuccessUrl("/login_success",true); // 로그인 성공시 리다이렉트되는 요청맵핑값
 //			.successForwardUrl("/login_success");
 		
 		// 3.csrf 비활성화
