@@ -16,7 +16,7 @@ public class GoodsDetailController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	// GoodsService 주입해서 연동시키기 (생성자로)qqqqq
+	// GoodsService 주입해서 연동시키기 (생성자로)
 	GoodsService goodsService;
 
 	public GoodsDetailController(GoodsService goodsService) {
@@ -26,7 +26,7 @@ public class GoodsDetailController {
 	@GetMapping("/goodsDetail")
 	public String goodDetail(ModelMap m, String gCode) {
 		
-		logger.info("logger:gCode:{}",gCode);
+		//logger.info("logger:gCode:{}",gCode);
 		GoodsDTO dto = goodsService.goodsDetail(gCode);
 		m.addAttribute("goodsDetail", dto);
 		
