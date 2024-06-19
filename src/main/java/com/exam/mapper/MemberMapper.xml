@@ -38,6 +38,10 @@
 		where userid=#{userid}
 	</select>
 
+
+	<!-- mypage 수정-->
+	<update id="mypageUpdate" parameterType="memberDTO"></update>
+
 </mapper>
 
 
