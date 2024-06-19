@@ -77,19 +77,12 @@ public class MemberController{
 	public String mypage(ModelMap m) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		logger.info("logger:Authentication:{}",auth);
-		MemberDTO xxx = (MemberDTO)auth.getPrincipal();
-		logger.info("logger:MemberDTO:{}",xxx);
-		
-		// 세션에 저장된 MemberDTO 얻어와서 뿌려주기
-		// @SessionAttributes 설정하고 ModelMap 만들어서 가져오기
-		MemberDTO dto = (MemberDTO) m.getAttribute("login");
-		logger.info("logger:mypage:{}", dto);
+		MemberDTO dto = (MemberDTO)auth.getPrincipal();
 		
 		String userid = dto.getUserid();
 		
-		MemberDTO searchDTO = memberService.mypage(userid);
-		m.addAttribute("login", searchDTO);
+		MemberDTO mypageDTO = memberService.mypage(userid);
+		m.addAttribute("mypage", mypageDTO);
 		
 		return "mypage";
 	}

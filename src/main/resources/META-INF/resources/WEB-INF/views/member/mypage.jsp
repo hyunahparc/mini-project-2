@@ -3,13 +3,22 @@
 <!-- jQuery webjar -->
 <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="container">
+ <script type="text/javascript">
+<!--$(document).ready(function() {
+			$("form").on("submit", function(){
+				
+	
+			});
+			
+		});-->
+</script>
+		<div class="container">
 	<form class="row g-3 m-4">
 		<div class="row mb-3">
-			<label for="userid" class="col-sm-2 col-form-label"> 아이디</label>
+			<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 			<div class="col-auto">
 				<input type="text" class="form-control" id="userid" name="userid"
-					value="${login.userid}" disabled="disabled">
+					value="${mypage.userid}" disabled="disabled">
 			</div>
 		</div>
 
@@ -17,7 +26,7 @@
 			<label for="username" class="col-sm-2 col-form-label">이름</label>
 			<div class="col-auto">
 				<input type="text" class="form-control" name="username"
-					id="username" value="${login.username}" disabled="disabled">
+					id="username" value="${mypage.username}" disabled="disabled">
 			</div>
 		</div>
 		<hr>
@@ -27,7 +36,7 @@
 			<label for="username" class="col-sm-2 col-form-label">적립금</label>
 			<div class="col-auto">
 				<input type="text" class="form-control" name="point"
-					id="point" value="${login.point}" disabled="disabled"> * 3천원 이상 사용 가능합니다.
+					id="point" value="${mypage.point}" disabled="disabled"> * 3천원 이상 사용 가능합니다.
 			</div>
 		</div>
 		<hr>
@@ -36,7 +45,7 @@
 		<div class="row mb-3">
 			<div class="col-auto">
 				<label for="sample4_postcode" class="visually-hidden">post</label> <input
-					type="text" name="post" value="${login.post}" class="form-control"
+					type="text" name="post" value="${mypage.post}" class="form-control"
 					id="sample4_postcode" placeholder="우편번호">
 			</div>
 			<div class="col-auto">
@@ -47,12 +56,12 @@
 		<div class="row mb-3">
 			<div class="col-sm-5">
 				<label for="sample4_roadAddress" class="visually-hidden">도로명주소</label>
-				<input type="text" name="addr1" value="${login.addr1}"
+				<input type="text" name="addr1" value="${mypage.addr1}"
 					class="form-control" id="sample4_roadAddress" placeholder="도로명주소">
 			</div>
 			<div class="col-sm-5">
 				<label for="sample4_jibunAddress" class="visually-hidden">지번주소</label>
-				<input type="text" name="addr2" value="${login.addr2}"
+				<input type="text" name="addr2" value="${mypage.addr2}"
 					class="form-control" id="sample4_jibunAddress" placeholder="지번주소">
 				<span id="guide" style="color: #999"></span>
 			</div>
@@ -63,30 +72,30 @@
 			<div class="col-auto">
 				<select name="phone1" class="form-control" id="phone1">
 					<option value="010"
-						<c:if test="${login.phone1 == '010'}">
+						<c:if test="${mypage.phone1 == '010'}">
 					  selected
 					</c:if>>010</option>
 					<option value="011"
-						<c:if test="${login.phone1 == '011'}">
+						<c:if test="${mypage.phone1 == '011'}">
 					  selected
 					</c:if>>011</option>
 				</select>
 			</div>
 			<div class="col-auto">
 				<label for="phone2" class="visually-hidden">전화번호2</label> <input
-					type="text" name="phone2" value="${login.phone2}"
+					type="text" name="phone2" value="${mypage.phone2}"
 					class="form-control" id="phone2">
 			</div>
 			<div class="col-auto">
 				<label for="phone3" class="visually-hidden">전화번호3</label> <input
-					type="text" name="phone3" value="${login.phone3}"
+					type="text" name="phone3" value="${mypage.phone3}"
 					class="form-control" id="phone3">
 			</div>
 		</div>
 		<div class="row mb-3">
 			<label for="email1" class="col-sm-2 col-form-label">이메일:</label>
 			<div class="col-auto">
-				<input type="text" name="email1" value="${login.email1}"
+				<input type="text" name="email1" value="${mypage.email1}"
 					class="form-control" id="email1">
 			</div>
 			<div class="col-auto">
@@ -94,13 +103,13 @@
 			</div>
 			<div class="col-auto">
 				<label for="email2" class="visually-hidden">이메일2</label> <input
-					type="text" name="email2" value="${login.email2}"
+					type="text" name="email2" value="${mypage.email2}"
 					class="form-control" id="email2" placeholder="직접입력">
 			</div>
 		</div>
 		<div class="col-12">
-			<button type="submit" class="btn btn-primary">update</button>
-			<button type="reset" class="btn btn-primary">cancel</button>
+			<button type="submit" class="btn btn-primary">수정</button>
+			<button type="reset" class="btn btn-primary">취소</button>
 		</div>
 	</form>
 
