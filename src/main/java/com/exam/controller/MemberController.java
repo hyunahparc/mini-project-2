@@ -5,6 +5,9 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -33,12 +36,11 @@ public class MemberController{
 
 	
 	@GetMapping("/idCheck")
-	// @ResponseBody 붙인 이유???
 	public @ResponseBody String idCheck(@RequestParam String userid) {
 		MemberDTO dto = memberService.idCheck(userid);
-		String mesg = "사용가능";
+		String mesg = "사용 가능합니다.";
 		if(dto!=null) {
-			mesg = "사용불가";
+			mesg = "이미 등록된 아이디입니다.";
 		}
 		
 		return mesg;
@@ -50,27 +52,34 @@ public class MemberController{
 		
 		MemberDTO dto = new MemberDTO();
 		m.addAttribute("memberDTO", dto);
-		
 		return "memberForm";
 	}
 	
 	@PostMapping("/signup")
 	public String signup(@Valid MemberDTO dto, BindingResult result) {
-		
+						//유효성검사(@valid) 후 result는 검사한 결과 담는 변수. hasErrors이용해서 처리.(valid다음순서로 와야함)
 		if(result.hasErrors()) {
 			return "memberForm";
 		}
 		
 		// DB 연동
 		logger.info("logger:signup:{}", dto);
+		
+		//비번 암호화
+		String encptPw = new BCryptPasswordEncoder().encode(dto.getPasswd());
+		dto.setPasswd(encptPw);
+		
 		int n = memberService.memberAdd(dto);
-		
-		
 		return "redirect:login";
 	}
 	
-	@GetMapping("mypage")
+	@GetMapping("/mypage")
 	public String mypage(ModelMap m) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		logger.info("logger:Authentication:{}",auth);
+		MemberDTO xxx = (MemberDTO)auth.getPrincipal();
+		logger.info("logger:MemberDTO:{}",xxx);
 		
 		// 세션에 저장된 MemberDTO 얻어와서 뿌려주기
 		// @SessionAttributes 설정하고 ModelMap 만들어서 가져오기
