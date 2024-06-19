@@ -36,8 +36,6 @@ public class AuthProvider implements AuthenticationProvider {
 		String passwd = (String)authentication.getCredentials();	 //name="passwd"값
 		
 		MemberDTO dto = memberService.idCheck(userid);
-		logger.info("logger:authProviderid:{}",userid);
-		logger.info("logger:authProviderpw:{}",passwd);
 		
 		//로그인 성공시
 		UsernamePasswordAuthenticationToken token = null;
