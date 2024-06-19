@@ -4,5 +4,5 @@
 
 <script>
    alert("카트 저장 성공")
-   location.href="/shop/main";
+   location.href="/shop/cartList";  /* 카트 저장 후 cartList로 가기 */
 </script>

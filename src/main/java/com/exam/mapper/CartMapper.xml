@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{userid}, #{gCode}, #{gAmount} )
 	</insert>
 
+	<!-- 장바구니 목록 보기 resultMap -->
 	<!-- 조인 -->
 	<resultMap type="CartDTO" id="yyy">
 		<id property="num" column="num" />
@@ -30,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</collection>
 	</resultMap>
 
-
+	<!-- 장바구니 목록 보기 -->
 	<select id="cartList" parameterType="string" resultMap="yyy">
 		select *
 		from cart join goods on cart.gCode = goods.gCode
