@@ -3,6 +3,8 @@ package com.exam.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,11 +16,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-
 import com.exam.dto.MemberDTO;
 import com.exam.service.MemberService;
 
+@Component
 public class AuthProvider implements AuthenticationProvider {
+
+	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	MemberService memberService;
@@ -27,18 +31,20 @@ public class AuthProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 	
 		
+		
 		String userid = (String)authentication.getPrincipal(); //name="userid"값
 		String passwd = (String)authentication.getCredentials();	 //name="passwd"값
 		
 		MemberDTO dto = memberService.idCheck(userid);
-		
+		logger.info("logger:authProviderid:{}",userid);
+		logger.info("logger:authProviderpw:{}",passwd);
 		
 		//로그인 성공시
 		UsernamePasswordAuthenticationToken token = null;
 		if(dto!=null && new BCryptPasswordEncoder().matches(passwd, dto.getPasswd())) {
 			List<GrantedAuthority> list = new ArrayList<>();
 			
-			list.add(new SimpleGrantedAuthority("willy"));
+			list.add(new SimpleGrantedAuthority("USER"));
 		
 		//암호화된 비번 대신 raw 비번으로 설정
 			dto.setPasswd(passwd);
