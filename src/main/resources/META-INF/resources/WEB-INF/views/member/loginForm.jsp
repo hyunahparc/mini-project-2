@@ -33,7 +33,7 @@
 </script>
 
 <div class="container">
-	<form class="row g-3 m-4">
+	<form action="auth" method="post" class="row g-3 m-4">
 
 		<div class="row mb-3">
 			<label for="userid" class="col-sm-2 col-form-label">아이디</label>
