@@ -14,20 +14,23 @@ public class SecurityFilterChainConfig {
 		// 커스터마이징 처리
 
 		// 1. 불필요한 인증 제거
-		http.authorizeRequests().antMatchers("/login","/main", "/signup", "/webjars/**", "/images/**").permitAll()
+		http.authorizeRequests().antMatchers("/login","/main", "/signup", "/webjars/**", "/images/**","/idCheck").permitAll()
 				// matchers 안에 있는애들은 다 허용하겠다는 뜻
 				.anyRequest()
-				.authenticated();
+				.authenticated().and().csrf()
+			.ignoringAntMatchers("/member/signup")
+		    	.ignoringAntMatchers("/member/login");
 
 		// 2. 로그인 관련 작업
 		http.formLogin() // 사용자가 만든 로그인화면으로 인증처리할거임
 			.loginPage("/login")// 로그인 페이지로 갈 수 있는 요청맵핑값. <a href="login">
 			.loginProcessingUrl("/auth") // <form action="auth" 적은 그 auth임
 			.usernameParameter("userid") // <input name = " userid" username이 이름이 아니고 id(식별자)임
-			.passwordParameter("passwd")
-			.failureForwardUrl("/login") // 로그인 실패시 리다이렉트되는 요청맵핑값
-			.defaultSuccessUrl("/login",true); // 성공시 리다이렉트되는 요청맵핑값
-
+			.passwordParameter("passwd")	
+			.failureForwardUrl("/login_fail") // 로그인 실패시 리다이렉트되는 요청맵핑값
+			.defaultSuccessUrl("/login_success",true); // 성공시 리다이렉트되는 요청맵핑값
+//			.successForwardUrl("/login_success");
+		
 		// 3.csrf 비활성화
 		http.csrf().disable();
 
