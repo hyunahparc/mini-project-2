@@ -14,7 +14,7 @@ public class SecurityFilterChainConfig {
 		// 커스터마이징 처리
 
 		// 1. 불필요한 인증 제거
-		http.authorizeRequests().antMatchers("/login","/main", "/signup", "/webjars/**", "/images/**","/idCheck").permitAll()
+		http.authorizeRequests().antMatchers("/goodsDetail*","/login","/main", "/signup", "/webjars/**", "/images/**","/idCheck").permitAll()
 				// matchers 안에 있는애들은 다 허용하겠다는 뜻
 				.anyRequest()
 				.authenticated().and().csrf()
