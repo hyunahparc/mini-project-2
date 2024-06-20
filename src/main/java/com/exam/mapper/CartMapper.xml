@@ -38,8 +38,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userid=#{userid}
 	</select>
 	
-	<!-- 장바구니 상품 개별 삭제 -->
-	<delete id="deleteByNum" parameterType="int">
+	<!-- 장바구니 상품 삭제 -->
+	<delete id="deleteCart" parameterType="CartDTO">
 		delete from cart
 		where num=#{num}
 	</delete>

@@ -8,5 +8,5 @@ public interface CartService {
 
 	public int cartAdd(CartDTO dto);
 	public List<CartDTO> cartList(String userid);
-	public int deleteByNum(int num);
+	public int deleteCart(CartDTO cartDTO);
 }

@@ -75,33 +75,41 @@ public class CartController {
 		// logger.info("logger:CartController::MemberDTO:{}", memberDTO);
 
 			// 로그인한 userid 값을 얻어서 DB에서 조회한다
-
 			String userid = memberDTO.getUserid();
 			// logger.info("logger:CartController::userid:{}", userid);
 			
 			List<CartDTO> cartList = cartService.cartList(userid);
-			logger.info("logger:CartController::cartList:{}", cartList);
+			// logger.info("logger:CartController::cartList:{}", cartList);
 			
 			m.addAttribute("cartList", cartList);
 
 		return "cartList";
 	}
 	
-	@PostMapping("/deleteByNum")
-	public String deleteByNum(ModelMap m, CartDTO cartDTO) {
+	// 카트에서 상품 선택 후 삭제
+	@PostMapping("/deleteCart")
+	public String deleteByNum(ModelMap m, CartDTO cartDTO, @RequestParam(value = "chbox[]") List<String> chArr) {
 		
+		// 로그인 정보 받아오기
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
 		
-		String userid = memberDTO.getUserid();
+		String userid = memberDTO.getUserid(); // 로그인 되어있는 아이디
 		
-		List<CartDTO> cartList = cartService.cartList(userid);
-		cartService.deleteByNum(25);
+		cartDTO.setUserid(userid);
 		
-		logger.info("logger:CartController::cartList:{}", cartList);
+		int cartNum = 0;
 		
+		for (String i : chArr) {
+			cartNum = Integer.parseInt(i);
+			
+			//logger.info("logger:CartController::cartNum:{}", cartNum);
+			cartDTO.setNum(cartNum);
+			cartService.deleteCart(cartDTO);
+		}
 		
-		
+//		logger.info("logger:CartController::num:{}", num);
+//		logger.info("logger:CartController::cartList:{}", cartList);
 		
 		return "redirect:cartList";
 	}

@@ -29,9 +29,11 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int deleteByNum(int num) {
-		return cartMapper.deleteByNum(num);
+	public int deleteCart(CartDTO cartDTO) {
+		return cartMapper.deleteCart(cartDTO);
 	}
+
+
 	
 	
 
