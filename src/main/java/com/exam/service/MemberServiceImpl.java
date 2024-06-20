@@ -37,4 +37,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.mypage(userid);
 	}
 
+	@Override
+	public int mypageUpdate(MemberDTO dto) {
+		return memberMapper.mypageUpdate(dto);
+	}
+
+	
+
 }

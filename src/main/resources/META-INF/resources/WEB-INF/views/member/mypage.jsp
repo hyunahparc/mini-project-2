@@ -3,17 +3,26 @@
 <!-- jQuery webjar -->
 <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <script type="text/javascript">
-<!--$(document).ready(function() {
-			$("form").on("submit", function(){
-				
-	
-			});
-			
-		});-->
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$("#cancelButton").click(function() {
+			window.location.href = "/shop/main"; // /main 페이지로 리다이렉트
+		});
+		
+	});
 </script>
-		<div class="container">
-	<form class="row g-3 m-4">
+<c:if test="${not empty sessionScope.message}">
+	<div class="alert success">
+		<p>${sessionScope.message}</p>
+	</div>
+	<% session.removeAttribute("message"); %>
+</c:if>
+
+<div class="container">
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<form class="row g-3 m-4" modelAttribute="memberDTO" method="post">
 		<div class="row mb-3">
 			<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 			<div class="col-auto">
@@ -35,8 +44,9 @@
 		<div class="row mb-3">
 			<label for="username" class="col-sm-2 col-form-label">적립금</label>
 			<div class="col-auto">
-				<input type="text" class="form-control" name="point"
-					id="point" value="${mypage.point}" disabled="disabled"> * 3천원 이상 사용 가능합니다.
+				<input type="text" class="form-control" name="point" id="point"
+					value="${mypage.point}" disabled="disabled"> * 3천원 이상 사용
+				가능합니다.
 			</div>
 		</div>
 		<hr>
@@ -59,6 +69,7 @@
 				<input type="text" name="addr1" value="${mypage.addr1}"
 					class="form-control" id="sample4_roadAddress" placeholder="도로명주소">
 			</div>
+
 			<div class="col-sm-5">
 				<label for="sample4_jibunAddress" class="visually-hidden">지번주소</label>
 				<input type="text" name="addr2" value="${mypage.addr2}"
@@ -109,10 +120,9 @@
 		</div>
 		<div class="col-12">
 			<button type="submit" class="btn btn-primary">수정</button>
-			<button type="reset" class="btn btn-primary">취소</button>
+			<button type="reset" class="btn btn-primary" id="cancelButton">취소</button>
 		</div>
-	</form>
-
+		</form>
 </div>
 
 
@@ -174,3 +184,4 @@
 				}).open();
 	}
 </script>
+
