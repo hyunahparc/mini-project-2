@@ -12,8 +12,9 @@ public interface MemberMapper {
 	// mapper.xml의 resultType, id, (parameterType) 그대로
 	public MemberDTO idCheck(String unserid);
 	public int memberAdd(MemberDTO dto);
-	
 	public MemberDTO login(Map<String, String> map);
+	
 	public MemberDTO mypage(String userid);
+	public int mypageUpdate(MemberDTO dto);
 	
 }
