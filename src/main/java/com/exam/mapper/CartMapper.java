@@ -16,7 +16,7 @@ public interface CartMapper {
 	// 장바구니 목록 보기
 	public List<CartDTO> cartList(String userid); 
 	
-	// 장바구니 상품 개별 삭제
-	public int deleteByNum(int num);
+	// 장바구니 상품 삭제 
+	public int deleteCart(CartDTO cartDTO);
 
 }
