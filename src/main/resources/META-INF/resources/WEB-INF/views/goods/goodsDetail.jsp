@@ -20,10 +20,11 @@
 				$("#gAmount").val(gAmount-1);
 			}
 		})
-			// 카트 서브밋
+		
+		// 카트 서브밋
 		$("form").on("submit", function(){
 			//alert("cartAdd submit");
-			this.action="cartAdd";  // CartAddServlet의 맵핑값
+			this.action="cartAdd";  // CartController - cartAdd의 맵핑값
 			this.method="post";
 		});
 		

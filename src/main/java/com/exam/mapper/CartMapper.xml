@@ -37,5 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from cart join goods on cart.gCode = goods.gCode
 		where userid=#{userid}
 	</select>
+	
+	<!-- 장바구니 상품 개별 삭제 -->
+	<delete id="deleteByNum" parameterType="int">
+		delete from cart
+		where num=#{num}
+	</delete>
 
 </mapper>
