@@ -27,7 +27,7 @@ import com.exam.service.CartService;
 import com.exam.service.CartServiceImpl;
 
 @Controller
-@SessionAttributes(names = { "login" })
+//@SessionAttributes(names = { "login" })
 public class CartController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
@@ -46,6 +46,7 @@ public class CartController {
 		// @SessionAttributes 설정하고 ModelMap 만들어서 가져오기
 		// MemberDTO memberDTO = (MemberDTO) m.getAttribute("login");
 		
+		// Security 적용 후 세션에 저장된 MemberDTO 얻어오는 방법
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
 
@@ -67,6 +68,7 @@ public class CartController {
 		// @SessionAttributes 설정하고 ModelMap 만들어서 가져오기
 		// MemberDTO memberDTO = (MemberDTO) m.getAttribute("login");
 		
+		// Security 적용 후 세션에 저장된 MemberDTO 얻어오는 방법
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
 
@@ -78,11 +80,30 @@ public class CartController {
 			// logger.info("logger:CartController::userid:{}", userid);
 			
 			List<CartDTO> cartList = cartService.cartList(userid);
-			// logger.info("logger:CartController::cartList:{}", cartList);
+			logger.info("logger:CartController::cartList:{}", cartList);
 			
 			m.addAttribute("cartList", cartList);
 
 		return "cartList";
+	}
+	
+	@PostMapping("/deleteByNum")
+	public String deleteByNum(ModelMap m, CartDTO cartDTO) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
+		
+		String userid = memberDTO.getUserid();
+		
+		List<CartDTO> cartList = cartService.cartList(userid);
+		cartService.deleteByNum(25);
+		
+		logger.info("logger:CartController::cartList:{}", cartList);
+		
+		
+		
+		
+		return "redirect:cartList";
 	}
 
 }

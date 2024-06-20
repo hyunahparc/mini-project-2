@@ -28,4 +28,11 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.cartList(userid);
 	}
 
+	@Override
+	public int deleteByNum(int num) {
+		return cartMapper.deleteByNum(num);
+	}
+	
+	
+
 }
