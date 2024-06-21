@@ -42,6 +42,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.mypageUpdate(dto);
 	}
 
+	@Override
+	public MemberDTO getMemberByUserId(String userid) {
+		return memberMapper.getMemberByUserId(userid);
+	}
+
+
 	
 
 }

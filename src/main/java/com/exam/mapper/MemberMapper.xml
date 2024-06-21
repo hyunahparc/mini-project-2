@@ -15,8 +15,10 @@
 
 	<!-- 회원가입 -->
 	<insert id="memberAdd" parameterType="MemberDTO">
-		insert into member (userid, passwd, username, post, addr1, addr2,
-		phone1, phone2, phone3, email1, email2)
+		insert into member (userid,
+		passwd, username, post, addr1, addr2,
+		phone1, phone2, phone3, email1,
+		email2)
 		values(#{userid},#{passwd},#{username},#{post},#{addr1},#{addr2},
 		#{phone1},#{phone2},#{phone3},#{email1},#{email2})
 
@@ -27,7 +29,8 @@
 		resultType="MemberDTO">
 		select *
 		from member
-		where userid=#{userid} and passwd=#{passwd}
+		where userid=#{userid} and
+		passwd=#{passwd}
 	</select>
 
 	<!-- mypage -->
@@ -39,20 +42,27 @@
 	</select>
 
 
-	<!-- mypage 수정-->
+	<!-- mypage 수정 -->
 	<update id="mypageUpdate" parameterType="memberDTO">
-		update member 
+		update member
 		set post = #{post},
-			addr1= #{addr1},
-			addr2= #{addr2},
-			phone1 = #{phone1}, 
-			phone2 = #{phone2},
-			phone3 = #{phone3},
-			email1 = #{email1}, 
-			email2 = #{email2} 
-		where userid = #{userid}; 
-	
+		addr1= #{addr1},
+		addr2= #{addr2},
+		phone1 = #{phone1},
+		phone2 = #{phone2},
+		phone3 = #{phone3},
+		email1 = #{email1},
+		email2 = #{email2}
+		where userid = #{userid};
 	</update>
+
+	<!-- 회원정보조회 -->
+	<select id="getMemberByUserId" parameterType="string"
+		resultType="com.exam.dto.MemberDTO">
+		select userid, username, post, addr1, addr2, phone1, phone2, phone3, point
+		from member where userid =#{userid};
+
+	</select>
 
 </mapper>
 

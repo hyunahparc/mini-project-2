@@ -12,5 +12,8 @@ public interface MemberService {
 
 	public MemberDTO mypage(String userid);
 	public int mypageUpdate(MemberDTO dto);
+	
+	public MemberDTO getMemberByUserId(String userid);
+	
 
 }
