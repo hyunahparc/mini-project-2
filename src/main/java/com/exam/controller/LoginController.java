@@ -3,6 +3,7 @@ package com.exam.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -29,7 +30,7 @@ public class LoginController {
 	}
 
 	@PostMapping(value = { "/login_fail" })
-	public String showlogin_failPage() {
+	public String showlogin_failPage(ModelMap m) {
 		logger.info("logger:showlogin_failPage");
 		return "redirect:login";
 	}
