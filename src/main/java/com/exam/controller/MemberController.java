@@ -56,6 +56,7 @@ public class MemberController {
 
 	@PostMapping("/signup")
 	public String signup(@Valid MemberDTO dto, BindingResult result) {
+		
 		// 유효성검사(@valid) 후 result는 검사한 결과 담는 변수. hasErrors이용해서 처리.(valid다음순서로 와야함)
 		if (result.hasErrors()) {
 			return "memberForm";

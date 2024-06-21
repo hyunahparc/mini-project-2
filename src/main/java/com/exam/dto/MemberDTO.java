@@ -1,5 +1,7 @@
 package com.exam.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.apache.ibatis.type.Alias;
@@ -7,19 +9,24 @@ import org.apache.ibatis.type.Alias;
 @Alias("MemberDTO")
 public class MemberDTO {
 
+	@NotBlank (message="아이디를 입력해주세요")
 	String userid;
-	
-	@Size(min = 4, message = "4글자 이상입니다.")
+	@Size(min = 4, message = "네 글자 이상 입력해주세요")
 	String passwd;
-	
+	@NotBlank (message="이름을 입력해주세요")
 	String username;
+	@NotBlank (message="주소를 입력해주세요")
 	String post;
 	String addr1;
 	String addr2;
 	String phone1;
+	@NotBlank (message="전화번호를 입력해주세요")
 	String phone2;
+	@NotBlank (message="전화번호를 입력해주세요")
 	String phone3;
+	@NotBlank (message="이메일을 입력해주세요")
 	String email1;
+	@NotBlank (message="이메일을 입력해주세요")
 	String email2;
 	int point;
 	
