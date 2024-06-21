@@ -49,7 +49,67 @@
 				});
 			}
 		});
+		
+		//선택한 상품만 주문할 페이지로 넘어가기
+		$("#SelectionToOrder_btn").click(function() {
+			
+			var confirm_val = confirm("선택하신 상품을 주문하시겠습니까?");                                                                                              
+			
+			if (confirm_val) {
+				var checkArr = new Array();
 
+				$("input[class='chBox']:checked").each(function() {
+					checkArr.push($(this).attr("data-cartNum"));
+				});
+
+//				var confirm_val = confirm("삭제되었습니다.");
+
+				$.ajax({
+					url : "/shop/orderList",
+					type : "post",
+					data : {
+						chbox : checkArr
+					},
+					success : function() {
+						location.href = "/shop/orderList";
+					}
+				});
+			}
+			
+		});
+		
+		//장바구니 전체 주문하기
+		$("#AllToOrder_btn").click(function() {
+			
+			var confirm_val = confirm("전체 상품을 주문하시겠습니까?");                                                                                              
+			
+			if (confirm_val) {
+				var checkArr = new Array();
+
+				$("input[class='chBox']").each(function() {
+					checkArr.push($(this).attr("data-cartNum"));
+				});
+	
+				$.ajax({
+					url : "/shop/orderList",
+					type : "post",
+					data : {
+						chbox : checkArr
+					},
+					success : function() {
+						location.href = "/shop/orderList";
+					}
+					error: function(xhr, status, error) {
+			                // 오류 처리
+			        console.error("주문 요청 중 오류 발생:", error);
+			                alert("주문을 처리하는 중 오류가 발생했습니다. 다시 시도해주세요.");
+			            }
+					
+				});
+			}
+			
+		});
+		
 	});
 </script>
 </head>
@@ -100,7 +160,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td colspan="3"><b>총 주문 금액 : &nbsp; ${sum } 원</b></td>
+						<td colspan="3"><b>총 주문 금액 : &nbsp; ${sum} 원</b></td>
 					</tr>
 				</tbody>
 
@@ -110,7 +170,9 @@
 		<div class="delBtn">
 			<button type="button" id="selectDelete_btn"
 				class="btn btn-success m-5"">선택 삭제</button>
-			<button type="button" id="" class="btn btn-success m-5"">주문하기</button>
+			<button type="button" id="SelectionToOrder_btn"
+				class="btn btn-success m-5"">선택상품주문</button>
+			<button type="button" id="AllToOrder_btn" class="btn btn-success m-5"">전체상품주문</button>
 		</div>
 	</div>
 </div>

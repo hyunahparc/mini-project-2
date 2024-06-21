@@ -172,6 +172,5 @@ public class MemberDTO {
 				+ phone3 + ", email1=" + email1 + ", email2=" + email2 + ", point=" + point + "]";
 	}
 	
-	
-	
+
 }

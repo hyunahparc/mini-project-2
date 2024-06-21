@@ -7,13 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 장바구니 저장 -->
 	<insert id="cartAdd" parameterType="CartDTO">
-		insert into cart (userid, gCode, gAmount)
+		insert into cart (userid,
+		gCode, gAmount)
 		values (#{userid}, #{gCode}, #{gAmount} )
 	</insert>
 
 	<!-- 장바구니 목록 보기 resultMap -->
 	<!-- 조인 -->
-	<resultMap type="CartDTO" id="yyy">
+	<resultMap type="CartDTO" id="cartResultMap">
 		<id property="num" column="num" />
 		<result property="userid" column="userid" />
 		<result property="gCode" column="gCode" />
@@ -32,16 +33,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<!-- 장바구니 목록 보기 -->
-	<select id="cartList" parameterType="string" resultMap="yyy">
+	<select id="cartList" parameterType="string"
+		resultMap="cartResultMap">
 		select *
 		from cart join goods on cart.gCode = goods.gCode
 		where userid=#{userid}
 	</select>
-	
+
+
+	<!-- 특정 회원의 장바구니 항목 조회 -->
+	<select id="findCartItemsByUserId" parameterType="String"
+		resultMap="cartResultMap">
+		SELECT
+		c.num,
+		c.userid,
+		c.gcode,
+		c.gamount,
+		c.gCartDate,
+		g.gcode AS gcode_goods,
+		g.gcategory,
+		g.gname,
+		g.gprice,
+		g.gimage,
+		g.gstock
+		FROM
+		cart c
+		JOIN
+		goods g ON c.gcode = g.gcode
+		WHERE
+		c.userid = #{userid}
+	</select>
+
+
 	<!-- 장바구니 상품 삭제 -->
 	<delete id="deleteCart" parameterType="CartDTO">
 		delete from cart
-		where num=#{num}
+		where
+		num=#{num}
 	</delete>
 
+	<!-- 주문 후 장바구니 전체 삭제 -->
+	<delete id="deleteCartItemsByUserId" parameterType="String">
+	DELETE FROM cart 
+	WHERE 
+	userid = #{userid}
+</delete>
 </mapper>

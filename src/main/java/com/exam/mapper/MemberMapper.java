@@ -17,4 +17,7 @@ public interface MemberMapper {
 	public MemberDTO mypage(String userid);
 	public int mypageUpdate(MemberDTO dto);
 	
+	public MemberDTO getMemberByUserId(String userid);
+
+	
 }
