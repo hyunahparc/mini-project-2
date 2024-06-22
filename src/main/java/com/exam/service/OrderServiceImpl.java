@@ -27,8 +27,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int orderAdd(OrderDTO orderDTO) {
-		return orderMapper.orderAdd(orderDTO);
+	public int orderAddSelected(OrderDTO orderDTO) {
+		return orderMapper.orderAddSelected(orderDTO);
 	}
 
 	@Override
@@ -36,4 +36,9 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.deleteCartById(userid);
 	}
 
+	@Override
+	public int deleteCartSelected(OrderDTO orderDTO) {
+		return orderMapper.orderAddSelected(orderDTO);
+	}
+	
 }

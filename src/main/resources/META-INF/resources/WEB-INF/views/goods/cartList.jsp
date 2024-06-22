@@ -48,10 +48,9 @@
 		});
 
 		//선택한 상품만 주문할 페이지로 넘어가기
-		$("#SelectionToOrder_btn").click(function() {
+		$("#orderAddSelected_btn").click(function() {
 
 			var confirm_val = confirm("선택하신 상품을 주문하시겠습니까?");
-
 			if (confirm_val) {
 				var checkArr = new Array();
 
@@ -59,13 +58,16 @@
 					checkArr.push($(this).attr("data-cartNum"));
 				});
 
+/* 				var confirm_val = confirm("선택 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
+ */				
 				$.ajax({
-					url : "/shop/orderAdd",
+					url : "/shop/orderAddSelected",
 					type : "post",
 					data : {
 						chbox : checkArr
 					},
 					success : function() {
+						alert("선택 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
 						location.href = "/shop/orderList";
 					}
 				});
@@ -85,6 +87,9 @@
 					checkArr.push($(this).attr("data-cartNum"));
 				});
 
+				var confirm_val = confirm("전체 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
+
+				
 				$.ajax({
 					url : "/shop/orderAddById",
 					type : "post",
@@ -160,7 +165,7 @@
 		<div class="delBtn">
 			<button type="button" id="selectDelete_btn"
 				class="btn btn-success m-5"">선택 삭제</button>
-			<button type="button" id="SelectionToOrder_btn"
+			<button type="button" id="orderAddSelected_btn"
 				class="btn btn-success m-5"">선택상품주문</button>
 			<button type="button" id="AllToOrder_btn" class="btn btn-success m-5"">전체상품주문</button>
 		</div>

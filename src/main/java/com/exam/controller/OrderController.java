@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.exam.dto.MemberDTO;
 import com.exam.dto.OrderDTO;
@@ -26,8 +27,8 @@ public class OrderController {
 		this.orderService = orderService;
 	}
 
-	@PostMapping("/orderAdd")
-	public String insertOrder(OrderDTO orderDTO) {
+	@PostMapping("/orderAddSelected")
+	public String orderAddSelected(OrderDTO orderDTO, @RequestParam(value = "chbox[]") List<String> chArr) {
 		
 		// Security 적용 후 세션에 저장된 MemberDTO 얻어오기
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -36,11 +37,25 @@ public class OrderController {
 		// 로그인 된 userid 값을 DB에서 조회		
 		String userid = memberDTO.getUserid();
 		
+		logger.info("logger:orderController::MemberDTO:{}", memberDTO);
+		
 		orderDTO.setUserid(userid);
 		
-//		int n = orderService.orderAdd(orderDTO); 
+		int cartNum = 0; 
 		
-		return "redirect:/orderList";
+		for (String i : chArr) {
+			cartNum = Integer.parseInt(i);
+			
+			orderDTO.setNum(cartNum);
+			orderService.orderAddSelected(orderDTO);
+
+//			orderService.deleteCartSelected(orderDTO);
+			
+
+		}
+		
+		return "order/orderAddSuccess";
+
 	}
 
 

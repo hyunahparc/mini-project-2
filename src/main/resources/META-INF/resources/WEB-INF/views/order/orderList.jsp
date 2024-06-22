@@ -8,22 +8,17 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		$("#gotomain").click(function() {
+		        window.location.href = "/shop/main";	
+		})
 	});
 </script>
 
 <style>
-h1 {
-	text-align: center;
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-style: italic;
+
+#total {
+	text-align: right;
 }
-
-
-#total{text-align:right;
-}
-
-
 </style>
 </head>
 
@@ -33,9 +28,6 @@ h1 {
 			<table class="table">
 				<thead>
 					<tr>
-						<br>
-						<h1>주문이 완료되었습니다!</h1>
-						<br>
 						<th>no</th>
 						<th colspan="2">상품</th>
 						<th>가격</th>
@@ -76,7 +68,8 @@ h1 {
 		</div>
 		<!-- <div type="button" class="btn btn-success m-5">전체삭제</div> -->
 		<div class="delBtn">
-			<button type="button" id="gotomain" class="btn btn-success m-5"">메인으로 돌아가기</button>
+			<button type="button" id="gotomain" class="btn btn-success m-5"">메인으로
+				돌아가기</button>
 		</div>
 	</div>
 </div>

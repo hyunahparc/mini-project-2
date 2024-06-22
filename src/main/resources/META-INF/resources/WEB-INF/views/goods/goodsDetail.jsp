@@ -71,7 +71,7 @@
 						id="down">
 
 				</h6>
-				<a href="#" class="btn btn-primary mt-3">구매</a>
+				<a href="/shop/orderAddSelected" class="btn btn-primary mt-3">구매</a>
 				<button type="submit" class="btn btn-primary mt-3">장바구니</button>
 			</div>
 
