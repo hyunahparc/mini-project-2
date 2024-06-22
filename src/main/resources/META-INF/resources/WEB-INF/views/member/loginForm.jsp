@@ -2,7 +2,15 @@
 	pageEncoding="UTF-8"%>
 <!-- jQuery webjar -->
 <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
-
+<style>
+#center {
+	text-align: center;
+	margin: 0 auto;
+	display: flex;
+  	justify-content: center;
+  	padding: 0 auto;
+}
+</style>
 <script type="text/javascript">
 
 
@@ -39,16 +47,16 @@
 	});// ready()
 </script>
 
-<div class="container">
+<div class="container" id="center">
 	<form action="auth" method="post" class="row g-3 m-4">
-		<div class="row mb-3">
+		<div class="row mb-3" id="center">
 		<div>${errorMessage }</div>
 			<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 			<div class="col-auto">
 				<input type="text" class="form-control" id="userid" name="userid">
 			</div>
 		</div>
-		<div class="row mb-3">
+		<div class="row mb-3" id="center">
 			<label for="password" class="col-sm-2 col-form-label">비밀번호</label>
 			<div class="col-auto">
 				<input type="password" class="form-control" id="passwd"
