@@ -47,19 +47,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<!-- 주문 목록에 추가(선택 추가) -->
-	<!-- 장바구니 내 품목 선택 추가가 아직 구현x -->
-	<insert id="orderAdd" parameterType="CartDTO">
+	<insert id="orderAddSelected" parameterType="OrderDTO">
 		insert into orders (userid,
-		gCode, gAmount)
-		values (#{userid}, #{gCode}, #{gAmount} )
+		gCode, gAmount, orderDate)
+		select userid, gCode, gAmount,
+		CURRENT_TIMESTAMP
+		from cart
+		where num=#{num};
 	</insert>
 
-
-	<!-- 주문 후 장바구니 전체 삭제 -->
+	<!-- 주문 후 장바구니 삭제 (전체 삭제) -->
 	<delete id="deleteCartById" parameterType="String">
 		DELETE FROM cart
 		WHERE
 		userid = #{userid}
 	</delete>
+
+	<!-- 주문 후 장바구니 삭제 (선택 삭제) -->
+	<delete id="deleteCartSelected" parameterType="OrderDTO">
+		delete from cart
+		where num=#{num} and userid=#{userid}
+	</delete>
+
 
 </mapper>

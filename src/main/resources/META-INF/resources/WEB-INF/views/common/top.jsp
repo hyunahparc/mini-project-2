@@ -188,6 +188,8 @@
 										<svg class="bi" width="24" height="24">
 									<use xlink:href="#cart" /></svg>
 								</a></li>
+								<li class="nav-item"><a class="nav-link" href="orderList">orderList</a>
+								</li>
 							</sec:authorize>
 
 						</ul>

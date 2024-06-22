@@ -16,8 +16,11 @@ public interface OrderMapper {
 	public int orderAddById(String userid);
 
 	// 주문 목록에 추가(선택 추가)
-	public int orderAdd(OrderDTO orderDTO);
+	public int orderAddSelected(OrderDTO orderDTO);
 	
-	// 주문 후 장바구니 전체 삭제
+	// 주문 후 장바구니 삭제 (전체 삭제)
 	public int deleteCartById(String userid);
+
+	// 주문 후 장바구니 삭제 (선택 삭제)
+	public int deleteCartSelected(OrderDTO orderDTO);
 }

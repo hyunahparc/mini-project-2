@@ -8,7 +8,9 @@ public interface OrderService {
 	
 	public List<OrderDTO> orderList(String userid); 
 	public int orderAddById(String userid);
-	public int orderAdd(OrderDTO orderDTO);
+	public int orderAddSelected(OrderDTO orderDTO);
 	public int deleteCartById(String userid);
-	
+	public int deleteCartSelected(OrderDTO orderDTO);
+
+
 }
