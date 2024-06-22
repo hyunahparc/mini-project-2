@@ -7,46 +7,33 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("OrderDTO")
 public class OrderDTO {
-	int orderid;
+	
+	int num;
 	String userid;
+	String gCode;
+	int gAmount;
 	LocalDate orderDate;
-	String username;
-	String post;
-	String addr1;
-	String addr2;
-	String phone1;
-	String phone2;
-	String phone3;
-	String point;
+	
+	List<GoodsDTO> goodsList;
 
-	List<CartDTO> list;
-    private MemberDTO member;
+	public OrderDTO() {
+	}
 
-
-	public OrderDTO() { }
-
-	public OrderDTO(int orderid, String userid, LocalDate orderDate, String username, String post, String addr1,
-			String addr2, String phone1, String phone2, String phone3, String point, List<CartDTO> list) {
-		this.orderid = orderid;
+	public OrderDTO(int num, String userid, String gCode, int gAmount, LocalDate orderDate, List<GoodsDTO> goodsList) {
+		this.num = num;
 		this.userid = userid;
+		this.gCode = gCode;
+		this.gAmount = gAmount;
 		this.orderDate = orderDate;
-		this.username = username;
-		this.post = post;
-		this.addr1 = addr1;
-		this.addr2 = addr2;
-		this.phone1 = phone1;
-		this.phone2 = phone2;
-		this.phone3 = phone3;
-		this.point = point;
-		this.list = list;
+		this.goodsList = goodsList;
 	}
 
-	public int getOrderid() {
-		return orderid;
+	public int getNum() {
+		return num;
 	}
 
-	public void setOrderid(int orderid) {
-		this.orderid = orderid;
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public String getUserid() {
@@ -57,6 +44,22 @@ public class OrderDTO {
 		this.userid = userid;
 	}
 
+	public String getgCode() {
+		return gCode;
+	}
+
+	public void setgCode(String gCode) {
+		this.gCode = gCode;
+	}
+
+	public int getgAmount() {
+		return gAmount;
+	}
+
+	public void setgAmount(int gAmount) {
+		this.gAmount = gAmount;
+	}
+
 	public LocalDate getOrderDate() {
 		return orderDate;
 	}
@@ -65,97 +68,28 @@ public class OrderDTO {
 		this.orderDate = orderDate;
 	}
 
-	public String getUsername() {
-		return username;
+	public List<GoodsDTO> getGoodsList() {
+		return goodsList;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPost() {
-		return post;
-	}
-
-	public void setPost(String post) {
-		this.post = post;
-	}
-
-	public String getAddr1() {
-		return addr1;
-	}
-
-	public void setAddr1(String addr1) {
-		this.addr1 = addr1;
-	}
-
-	public String getAddr2() {
-		return addr2;
-	}
-
-	public void setAddr2(String addr2) {
-		this.addr2 = addr2;
-	}
-
-	public String getPhone1() {
-		return phone1;
-	}
-
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
-	}
-
-	public String getPhone2() {
-		return phone2;
-	}
-
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
-	}
-
-	public String getPhone3() {
-		return phone3;
-	}
-
-	public void setPhone3(String phone3) {
-		this.phone3 = phone3;
-	}
-
-	public String getPoint() {
-		return point;
-	}
-
-	public void setPoint(String point) {
-		this.point = point;
-	}
-
-	public List<CartDTO> getList() {
-		return list;
-	}
-
-	public void setList(List<CartDTO> list) {
-		this.list = list;
+	public void setGoodsList(List<GoodsDTO> goodsList) {
+		this.goodsList = goodsList;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderDTO [orderid=" + orderid + ", userid=" + userid + ", orderDate=" + orderDate + ", username="
-				+ username + ", post=" + post + ", addr1=" + addr1 + ", addr2=" + addr2 + ", phone1=" + phone1
-				+ ", phone2=" + phone2 + ", phone3=" + phone3 + ", point=" + point + ", list=" + list + "]";
+		return "OrderDTO [num=" + num + ", userid=" + userid + ", gCode=" + gCode + ", gAmount=" + gAmount
+				+ ", orderDate=" + orderDate + ", goodsList=" + goodsList + "]";
 	}
-	
-	
-	
-	  // getter and setter for member
-  public MemberDTO getMember() {
-      return member;
-  }
 
-  public void setMember(MemberDTO member) {
-      this.member = member;
-  }
+
 	
-	
-	
+
+//	List<CartDTO> list;
+//	List<GoodsDTO> goodsList;
+//	List<MemberDTO> memberList;
+//	MemberDTO member;
+
+
 }
 

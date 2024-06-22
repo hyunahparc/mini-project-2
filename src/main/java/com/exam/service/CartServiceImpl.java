@@ -2,7 +2,6 @@ package com.exam.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.exam.dto.CartDTO;
@@ -11,7 +10,6 @@ import com.exam.mapper.CartMapper;
 @Service
 public class CartServiceImpl implements CartService {
 	
-	// CartMapper와 연동하기 (생성자 이용)
 	CartMapper cartMapper;
 	
 	public CartServiceImpl(CartMapper cartMapper) {
@@ -32,19 +30,5 @@ public class CartServiceImpl implements CartService {
 	public int deleteCart(CartDTO cartDTO) {
 		return cartMapper.deleteCart(cartDTO);
 	}
-
-	@Override
-	public List<CartDTO> findCartItemsByUserId(String userid) {
-		return cartMapper.findCartItemsByUserId(userid);
-	}
-
-	@Override
-	public int deleteCartItemsByUserId(String userid) {
-		return cartMapper.deleteCartItemsByUserId(userid);
-	}
-
-
-	
-	
 
 }

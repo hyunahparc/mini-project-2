@@ -9,10 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.exam.dto.CartDTO;
 import com.exam.dto.MemberDTO;
 import com.exam.dto.OrderDTO;
 import com.exam.service.OrderService;
@@ -21,58 +19,63 @@ import com.exam.service.OrderService;
 public class OrderController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
-//	logger.info("logger:CartController:cartNum:{}", cartNum);
+	
+	OrderService orderService;
 
-	OrderService orderservice;
-
-	public OrderController(OrderService orderservice) {
-		this.orderservice = orderservice;
+	public OrderController(OrderService orderService) {
+		this.orderService = orderService;
 	}
+
+	@PostMapping("/orderAdd")
+	public String insertOrder(OrderDTO orderDTO) {
+		
+		// Security 적용 후 세션에 저장된 MemberDTO 얻어오기
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
+		
+		// 로그인 된 userid 값을 DB에서 조회		
+		String userid = memberDTO.getUserid();
+		
+		orderDTO.setUserid(userid);
+		
+//		int n = orderService.orderAdd(orderDTO); 
+		
+		return "redirect:/orderList";
+	}
+
 
 	@GetMapping("/orderList")
 	public String orderListForm(ModelMap m) {
-		CartDTO dto = new CartDTO();
-		m.addAttribute("CartDTO", dto);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
+		String userid = memberDTO.getUserid();
+		
+		List<OrderDTO> orderList = orderService.orderList(userid);
+		m.addAttribute("orderList", orderList);
+
 		return "orderList";
 	}
 
-	@PostMapping("/orderList")
-	public String orderList(ModelMap m) {
 
-		// Security 적용 후 세션에 저장된 MemberDTO 얻어오는 방법
+	
+	@PostMapping("/orderAddById")
+	public String orderAddById(OrderDTO orderDTO) {
+		
+		// Security 적용 후 세션에 저장된 MemberDTO 얻어오기
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
-
-		// 로그인한 userid 값을 얻어서 DB에서 조회한다
-		String userid = memberDTO.getUserid();
-
-		List<OrderDTO> orderList = orderservice.findOrderByUserId(userid);
-		// logger.info("logger:CartController::cartList:{}", cartList);
-
 		
-		m.addAttribute("orderList", orderList);
-
-		return "order/orderList";
+		// 로그인 된 userid 값을 DB에서 조회		
+		String userid = memberDTO.getUserid();
+		
+		orderDTO.setUserid(userid);
+		
+		int n = orderService.orderAddById(userid); //주문하기
+		
+		if(n>0) orderService.deleteCartById(userid); //주문 성공 시 카트 전체 삭제
+		
+		return "order/orderAddSuccess";
 	}
 
-	
-	@PostMapping("/createOrder")
-	public String createOrder(@ModelAttribute("CartDTO") CartDTO cartDTO, ModelMap model) {
-		// Security 적용 후 세션에 저장된 MemberDTO 얻어오는 방법
-				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-				MemberDTO memberDTO = (MemberDTO) auth.getPrincipal();
-
-				// 로그인한 userid 값을 얻어서 DB에서 조회한다
-				String userid = memberDTO.getUserid();
-				
-				OrderDTO orderDTO = new OrderDTO();
-				orderDTO.setUserid(userid);
-				
-				
-				orderservice.createOrder(orderDTO);
-				
-				
-		return "redirect:/main";
-	}
-	
 }

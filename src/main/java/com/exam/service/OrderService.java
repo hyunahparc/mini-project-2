@@ -6,9 +6,9 @@ import com.exam.dto.OrderDTO;
 
 public interface OrderService {
 	
-
-    public void createOrder(OrderDTO orderDTO);
-    
-    public List<OrderDTO> findOrderByUserId(String userid);
-
+	public List<OrderDTO> orderList(String userid); 
+	public int orderAddById(String userid);
+	public int orderAdd(OrderDTO orderDTO);
+	public int deleteCartById(String userid);
+	
 }

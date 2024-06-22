@@ -9,8 +9,22 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		});
+	});
 </script>
+
+<style>
+h1 {
+	text-align: center;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+}
+
+
+#total{text-align:right;
+}
+
+
+</style>
 </head>
 
 <div class="Mall">
@@ -19,47 +33,42 @@
 			<table class="table">
 				<thead>
 					<tr>
-<!-- 						<th><div class="allCheck">
-								<input type="checkbox" name="allCheck" id="allCheck" /><label
-									for="allCheck">전체 선택</label>
-							</div></th>
-						<th></th> -->
-						<th>상품명</th>
+						<br>
+						<h1>주문이 완료되었습니다!</h1>
+						<br>
+						<th>no</th>
+						<th colspan="2">상품</th>
 						<th>가격</th>
 						<th>수량</th>
 						<th>합계</th>
-						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:set var="sum" value="0" />
-					<c:forEach items="${cartList }" var="cartList" varStatus="status">
+					<c:forEach items="${orderList}" var="orderList" varStatus="status">
 
 						<!-- 변수 선언하기 -->
-						<c:set var="amount" value="${cartList.gAmount}" />
+						<c:set var="amount" value="${orderList.gAmount}" />
 						<c:set var="sum"
-							value="${cartList.goodsList[0].gPrice * amount + sum}" />
+							value="${orderList.goodsList[0].gPrice * amount + sum}" />
 						<tr>
-							<td><div class="checkBox">
+							<%-- <td><div class="checkBox">
 									<input type="checkbox" name="chBox" class="chBox"
-									data-cartNum="${cartList.num}" />
-								</div></td>
+										data-cartNum="${orderList.num}" />
+								</div></td> --%>
+							<td>${status.index + 1}</td>
 							<td><img
-								src="images/items/${cartList.goodsList[0].gImage }.png"
+								src="images/items/${orderList.goodsList[0].gImage }.png"
 								width="100" height="100"></td>
-							<td>${cartList.goodsList[0].gName }</td>
-							<td>${cartList.goodsList[0].gPrice }</td>
-							<td>${cartList.gAmount}</td>
-							<td>${cartList.goodsList[0].gPrice * amount }</td>
+							<td>${orderList.goodsList[0].gName }</td>
+							<td>${orderList.goodsList[0].gPrice }</td>
+							<td>${orderList.gAmount}</td>
+							<td>${orderList.goodsList[0].gPrice * amount }</td>
 						</tr>
 					</c:forEach>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td colspan="3"><b>총 주문 금액 : &nbsp; ${sum } 원</b></td>
+						<td colspan="4"></td>
+						<td id="total" colspan="2"><b>총 결제 금액 : &nbsp; ${sum} 원</b></td>
 					</tr>
 				</tbody>
 
@@ -67,7 +76,7 @@
 		</div>
 		<!-- <div type="button" class="btn btn-success m-5">전체삭제</div> -->
 		<div class="delBtn">
-			<button type="button" id="" class="btn btn-success m-5"">주문 및 결제</button>
+			<button type="button" id="gotomain" class="btn btn-success m-5"">메인으로 돌아가기</button>
 		</div>
 	</div>
 </div>

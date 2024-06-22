@@ -4,22 +4,62 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exam.mapper.OrderMapper">
-  
-  	
-  
-   <!-- 주문 생성 -->
-    <insert id="createOrder" parameterType="com.exam.dto.OrderDTO">
-        INSERT INTO orders (orderid, userid, orderDate, username, post, addr1, addr2, phone1, phone2, phone3, point)
-        VALUES (#{orderid}, #{userid}, #{orderDate}, #{username}, #{post}, #{addr1}, #{addr2}, #{phone1}, #{phone2}, #{phone3}, #{point})
-    </insert>
 
-    <!-- 주문 조회 -->
-    <select id="findOrderByUserId" parameterType="String" resultType="com.exam.dto.OrderDTO">
-        SELECT orderid, userid, orderDate, username, post, addr1, addr2, phone1, phone2, phone3, point
-        FROM orders
-        WHERE userid = #{userid}
-    </select>
 
-  
-	
+	<!-- 주문 목록 보기 resultMap -->
+	<!-- 조인 -->
+	<resultMap type="OrderDTO" id="orderResultMap">
+		<id property="num" column="num" />
+		<result property="userid" column="userid" />
+		<result property="gCode" column="gCode" />
+		<result property="gAmount" column="gAmount" />
+		<result property="orderDate" column="orderDate" />
+
+		<!-- 1:N -->
+		<collection property="goodsList" ofType="java.util.Map">
+			<id property="gCode" column="gCode" />
+			<result property="gCategory" column="gCategory" />
+			<result property="gName" column="gName" />
+			<result property="gPrice" column="gPrice" />
+			<result property="gImage" column="gImage" />
+			<result property="gStock" column="gStock" />
+		</collection>
+	</resultMap>
+
+	<!-- 주문 목록 보기 -->
+	<select id="orderList" parameterType="string"
+		resultMap="orderResultMap">
+		select *
+		from orders join goods on orders.gCode = goods.gCode
+		where userid=#{userid}
+	</select>
+
+	<!-- 주문 목록 추가(전체 추가) -->
+	<!-- 해당 id에 가지고 있는 장바구니 모두 주문 목록 넣기/구현완료 -->
+	<insert id="orderAddById" parameterType="String">
+		insert into orders
+		(userid, gCode, gAmount,orderDate)
+		select userid, gCode,
+		gAmount,
+		CURRENT_TIMESTAMP()
+		from cart
+		where userid=#{userid};
+	</insert>
+
+	<!-- 주문 목록에 추가(선택 추가) -->
+	<!-- 장바구니 내 품목 선택 추가가 아직 구현x -->
+	<insert id="orderAdd" parameterType="CartDTO">
+		insert into orders (userid,
+		gCode, gAmount)
+		values (#{userid}, #{gCode}, #{gAmount} )
+	</insert>
+
+
+	<!-- 주문 후 장바구니 전체 삭제 -->
+	<delete id="deleteCartById" parameterType="String">
+		DELETE FROM cart
+		WHERE
+		userid = #{userid}
+	</delete>
+
 </mapper>

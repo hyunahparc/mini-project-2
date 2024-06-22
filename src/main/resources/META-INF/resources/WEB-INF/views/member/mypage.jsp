@@ -22,7 +22,7 @@
 
 <div class="container">
 	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-	<form class="row g-3 m-4" modelAttribute="memberDTO" method="post">
+	<form class="row g-3 m-4" method="post">
 		<div class="row mb-3">
 			<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 			<div class="col-auto">
