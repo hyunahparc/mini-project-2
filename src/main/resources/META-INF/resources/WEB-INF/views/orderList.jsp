@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문하기</title>
+<title>주문목록</title>
 <style type="text/css">
 .App {
 	text-align: center;

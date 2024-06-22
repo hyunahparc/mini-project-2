@@ -27,7 +27,6 @@
 		// 체크박스 선택 후 삭제 버튼 (개별 삭제 & 전체 삭제)
 		$("#selectDelete_btn").click(function() {
 			var confirm_val = confirm("선택하신 상품을 장바구니에서 삭제하시겠습니까?");
-
 			if (confirm_val) {
 				var checkArr = new Array();
 
@@ -49,12 +48,12 @@
 				});
 			}
 		});
-		
+
 		//선택한 상품만 주문할 페이지로 넘어가기
 		$("#SelectionToOrder_btn").click(function() {
-			
-			var confirm_val = confirm("선택하신 상품을 주문하시겠습니까?");                                                                                              
-			
+
+			var confirm_val = confirm("선택하신 상품을 주문하시겠습니까?");
+
 			if (confirm_val) {
 				var checkArr = new Array();
 
@@ -62,10 +61,8 @@
 					checkArr.push($(this).attr("data-cartNum"));
 				});
 
-//				var confirm_val = confirm("삭제되었습니다.");
-
 				$.ajax({
-					url : "/shop/orderList",
+					url : "/shop/orderAdd",
 					type : "post",
 					data : {
 						chbox : checkArr
@@ -75,23 +72,23 @@
 					}
 				});
 			}
-			
+
 		});
-		
+
 		//장바구니 전체 주문하기
 		$("#AllToOrder_btn").click(function() {
-			
-			var confirm_val = confirm("전체 상품을 주문하시겠습니까?");                                                                                              
-			
+
+			var confirm_val = confirm("전체 상품을 주문하시겠습니까?");
+
 			if (confirm_val) {
 				var checkArr = new Array();
 
 				$("input[class='chBox']").each(function() {
 					checkArr.push($(this).attr("data-cartNum"));
 				});
-	
+
 				$.ajax({
-					url : "/shop/orderList",
+					url : "/shop/orderAddById",
 					type : "post",
 					data : {
 						chbox : checkArr
@@ -99,17 +96,12 @@
 					success : function() {
 						location.href = "/shop/orderList";
 					}
-					error: function(xhr, status, error) {
-			                // 오류 처리
-			        console.error("주문 요청 중 오류 발생:", error);
-			                alert("주문을 처리하는 중 오류가 발생했습니다. 다시 시도해주세요.");
-			            }
-					
+
 				});
 			}
-			
+
 		});
-		
+
 	});
 </script>
 </head>

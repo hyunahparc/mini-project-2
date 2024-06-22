@@ -88,7 +88,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/mypage")
-	public String mypageUpdate(@Valid MemberDTO dto, BindingResult result, HttpSession session) {
+	public String mypageUpdate(MemberDTO dto, BindingResult result, HttpSession session) {
 		  if (result.hasErrors()) {
 	            return "mypage";
 	        }
@@ -99,14 +99,17 @@ public class MemberController {
 		
 		//dto에 현재 사용자 id정보 셋팅
 		dto.setUserid(nowUser.getUserid());
+		logger.info("logger:나와:{}", dto);
 		
 		//정보 업데이트 여부
 		int n = memberService.mypageUpdate(dto);
 		
 		if(n>0) {
 		session.setAttribute("message", "회원정보를 수정하였습니다.");
+		logger.info("logger:수정성공:{}", dto);
 		}else {
 		session.setAttribute("message", "회원정보 수정에 실패하였습니다.\n다시 시도하세요.");			
+		logger.info("logger:실패실패:{}", dto);
 		}
 		
 		

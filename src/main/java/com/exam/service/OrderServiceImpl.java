@@ -3,50 +3,37 @@ package com.exam.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.exam.dto.MemberDTO;
 import com.exam.dto.OrderDTO;
-import com.exam.mapper.CartMapper;
-import com.exam.mapper.MemberMapper;
 import com.exam.mapper.OrderMapper;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-	
-    private final OrderMapper orderMapper;
-    private final MemberMapper memberMapper;
-    private final CartMapper cartMapper;
 
+	OrderMapper orderMapper;
 
-    public OrderServiceImpl(OrderMapper orderMapper, MemberMapper memberMapper, CartMapper cartMapper) {
+	public OrderServiceImpl(OrderMapper orderMapper) {
 		this.orderMapper = orderMapper;
-		this.memberMapper = memberMapper;
-		this.cartMapper = cartMapper;
 	}
 
+	@Override
+	public List<OrderDTO> orderList(String userid) {
+		return orderMapper.orderList(userid);
+	}
 
+	@Override
+	public int orderAddById(String userid) {
+		return orderMapper.orderAddById(userid);
+	}
 
-    @Transactional
-    @Override
-    public void createOrder(OrderDTO orderDTO) {
-        //주문 테이블에 주문 정보 삽입
-        orderMapper.insertOrder(orderDTO);
+	@Override
+	public int orderAdd(OrderDTO orderDTO) {
+		return orderMapper.orderAdd(orderDTO);
+	}
 
-        // 예시: 장바구니 테이블에서 해당 사용자의 상품 삭제
-        cartMapper.deleteCartItemsByUserId(orderDTO.getUserid());
-    }
+	@Override
+	public int deleteCartById(String userid) {
+		return orderMapper.deleteCartById(userid);
+	}
 
-    @Override
-    public List<OrderDTO> findOrderByUserId(String userid) {
-        List<OrderDTO> orders = orderMapper.findOrderByUserIdOnCart(userid);
-        
-        // 회원 정보를 가져와서 OrderDTO에 추가
-        MemberDTO member = memberMapper.getMemberByUserId(userid);
-        for (OrderDTO order : orders) {
-            order.setMember(member); // OrderDTO에 회원 정보 설정
-        }
-        
-        return orders;
-    }
 }
