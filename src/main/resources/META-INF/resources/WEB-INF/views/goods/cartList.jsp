@@ -50,7 +50,7 @@
 											var checkArr = []; // 빈 배열로 초기화
 
 											// 체크할 상품이 없는 경우
-											if ($("input[class='chBox']").length === 0) {
+											if ($("input.chBox:checked").length === 0) {
 												alert("삭제할 상품이 없습니다.");
 												return; // 함수 종료
 											}
@@ -59,7 +59,7 @@
 											if (confirm_val) {
 
 												$(
-														"input[class='chBox']:checked")
+														"input.chBox:checked")
 														.each(
 																function() {
 																	checkArr
@@ -93,7 +93,7 @@
 											var checkArr = []; // 빈 배열로 초기화
 
 											// 체크할 상품이 없는 경우
-											if ($("input[class='chBox']").length === 0) {
+											if ($("input.chBox:checked").length === 0) {
 												alert("주문할 상품이 없습니다.");
 												return; // 함수 종료
 											}
@@ -102,7 +102,7 @@
 											if (confirm_val) {
 
 												$(
-														"input[class='chBox']:checked")
+														"input.chBox:checked")
 														.each(
 																function() {
 																	checkArr
@@ -127,62 +127,61 @@
 											}
 
 										});
+						
+						
+						 // 체크박스 전체 선택 기능 함수 정의
+					    function checkAllBoxes(chk) {
+					        if (chk) {
+					            $(".chBox").prop("checked", true);
+					        } else {
+					            $(".chBox").prop("checked", false);
+					        }
+					        sumPrice(); // 전체 선택 후 가격 합계 업데이트
+					        if (typeof callback === 'function') {
 
-						//장바구니 전체 주문하기
-						$("#AllToOrder_btn")
-								.click(
-										function() {
+					        callback(); // 콜백 함수 호출
+					        }
+					    }
+		
 
-											var checkArr = []; // 빈 배열로 초기화
+						
+			            // 장바구니 전체 주문하기
+			            $("#AllToOrder_btn").click(function() {
+			                var checkArr = []; // 빈 배열로 초기화
+			                // 체크할 상품이 없는 경우
+			                if ($("input.chBox:checked").length === 0) {
+			                    alert("주문할 상품이 없습니다.");
+			                    return; // 함수 종료
+			                }
+			                checkAllBoxes(true); // 모든 체크박스 선택
 
-											// 체크할 상품이 없는 경우
-											if ($("input[class='chBox']").length === 0) {
-												alert("주문할 상품이 없습니다.");
-												return; // 함수 종료
-											}
+			                // 모든 체크박스 선택 후 confirm 창 띄우기
+			                setTimeout(function() {
+			                    var confirm_val = confirm("전체 상품을 주문하시겠습니까?");
+			                    if (confirm_val) {
+			                        $("input.chBox:checked").each(function() {
+			                            checkArr.push($(this).attr("data-cartNum"));
+			                        });
 
-											var confirm_val = confirm("전체 상품을 주문하시겠습니까?");
-											if (confirm_val) {
-												$("input[class='chBox']")
-														.each(
-																function() {
-																	checkArr
-																			.push($(
-																					this)
-																					.attr(
-																							"data-cartNum"));
-																});
+			                        confirm("전체 상품 주문 완료 \n ♡＼(´▽ `)ノ♡");
 
-												var confirm_val = confirm("전체 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
-
-												$
-														.ajax({
-															url : "/shop/orderAddById",
-															type : "post",
-															data : {
-																chbox : checkArr
-															},
-															success : function() {
-																location.href = "/shop/orderList";
-															}
-
-														});
-											}
-
-											// 페이지 로드 시 초기 합계 계산
-											sumPrice();
-										});
-
-						/* 
-						 // 각 체크박스 클릭 시 즉시 가격 업데이트
-						 $("input.chBox").click(function() {
-						 console.log("Checkbox clicked");
-
-						 sumPrice();
-						 }); */
-
-						// 페이지 로드 시 체크된 상품들의 총 가격 계산 및 표시
-					});
+			                        $.ajax({
+			                            url: "/shop/orderAddById",
+			                            type: "post",
+			                            data: {
+			                                chbox: checkArr
+			                            },
+			                            success: function() {
+			                                location.href = "/shop/orderList";
+			                            }
+			                        });
+			                    } else {
+			                        // 사용자가 확인을 취소한 경우 체크박스 선택 취소
+			                        checkAllBoxes(false);
+			                    }
+			                }, 100); // 약간의 시간 지연을 줘서 체크박스 선택이 먼저 반영되도록 함
+			            });
+			        });
 </script>
 </head>
 
