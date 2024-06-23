@@ -115,10 +115,9 @@
             var confirmLogout = confirm("로그아웃 하시겠습니까?");
 
             if (confirmLogout) {
-                // 여기에 로그아웃 처리 코드를 추가하세요
-                // 예를 들어, 로그아웃 URL로 리다이렉트할 수 있습니다.
                 window.location.href = "/logout";
-            }else{return false; } //현재페이지에 머무르기
+            }else{
+            	return false; } //현재 페이지에 머무르기
         });
     });
 </script>
