@@ -116,7 +116,8 @@
 
             if (confirmLogout) {
                 window.location.href = "/logout";
-            }else{return false; } //현재페이지에 머무르기
+            }else{
+            	return false; } //현재 페이지에 머무르기
         });
     });
 </script>
