@@ -7,8 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 장바구니 저장 -->
 	<insert id="cartAdd" parameterType="CartDTO">
-		insert into cart (userid, gCode, gAmount)
-		values (#{userid}, #{gCode}, #{gAmount} )
+
+		INSERT INTO cart (userid, gCode, gAmount)
+		VALUES (#{userid}, #{gCode}, #{gAmount})
+		ON DUPLICATE KEY UPDATE gAmount = gAmount + #{gAmount};
+		<!-- insert into cart (userid,
+		gCode, gAmount)
+		values (#{userid}, #{gCode}, #{gAmount} ) -->
 	</insert>
 
 	<!-- 장바구니 목록 보기 resultMap -->
@@ -43,7 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 장바구니 상품 삭제 -->
 	<delete id="deleteCart" parameterType="CartDTO">
 		delete from cart
-		where num=#{num}
+		where
+		num=#{num}
 	</delete>
 
 

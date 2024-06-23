@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!-- jQuery webjar -->
 <script src="webjars/jquery/3.7.1/jquery.min.js"></script>
+
 <style>
 #center {
 	text-align: center;
@@ -14,10 +15,25 @@
 	color: red;
 }
 </style>
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
+		 $("#loginForm").on("submit", function(event) {
+		        // 폼 제출을 일시 중지
+		        event.preventDefault();
 
-		/* // 로그인 서브밋
+		        // 사용자에게 confirm 창을 띄우기
+		        var confirmSubmit = confirm("환영합니다!");
+
+		        // 사용자가 확인을 눌렀을 때 폼을 실제로 제출합니다.
+		        if (confirmSubmit) {
+		            $(this).off("submit").submit(); // 폼 제출
+		            
+		        }
+		    });
+
+		 /* // 로그인 서브밋
 		 $("form").on("submit", function() {
 
 			var errorMessage = '${errorMessage}';
@@ -45,7 +61,7 @@
 </c:if>
 
 <div class="container" id="center">
-	<form action="auth" method="post" class="row g-3 m-4">
+	<form action="auth" method="post" id="loginForm" class="row g-3 m-4">
 		<div class="row mb-3" id="center">
 			<div>${errorMessage }</div>
 			<label for="userid" class="col-sm-2 col-form-label">아이디</label>
