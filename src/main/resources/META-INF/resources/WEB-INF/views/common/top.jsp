@@ -15,7 +15,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.122.0">
-<title>Product example · Bootstrap v5.3</title>
+<title></title>
 
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.3/examples/product/">
@@ -109,6 +109,19 @@
 	display: block !important;
 }
 </style>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#logout_btn").click(function() {
+            var confirmLogout = confirm("로그아웃 하시겠습니까?");
+
+            if (confirmLogout) {
+                // 여기에 로그아웃 처리 코드를 추가하세요
+                // 예를 들어, 로그아웃 URL로 리다이렉트할 수 있습니다.
+                window.location.href = "/logout";
+            }else{return false; } //현재페이지에 머무르기
+        });
+    });
+</script>
 
 
 <!-- Custom styles for this template -->
@@ -180,7 +193,7 @@
                           세션에 저장된 login 값이 null이 아닌 경우-->
 
 							<sec:authorize access="isAuthenticated()">
-								<li class="nav-item"><a class="nav-link" href="logout">logout</a>
+								<li class="nav-item"><a class="nav-link" id="logout_btn" href="logout">logout</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="mypage">mypage</a>
 								</li>

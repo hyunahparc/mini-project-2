@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- ${cartList} --%>
 <head>
-<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script src="webjars/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -51,7 +51,7 @@
 
 											// 체크할 상품이 없는 경우
 											if ($("input.chBox:checked").length === 0) {
-												alert("삭제할 상품이 없습니다.");
+												alert("삭제할 상품을 선택해주세요!");
 												return; // 함수 종료
 											}
 
@@ -94,7 +94,7 @@
 
 											// 체크할 상품이 없는 경우
 											if ($("input.chBox:checked").length === 0) {
-												alert("주문할 상품이 없습니다.");
+												alert("주문할 상품을 선택해주세요!");
 												return; // 함수 종료
 											}
 
@@ -147,13 +147,13 @@
 						
 			            // 장바구니 전체 주문하기
 			            $("#AllToOrder_btn").click(function() {
+			                checkAllBoxes(true); // 모든 체크박스 선택
 			                var checkArr = []; // 빈 배열로 초기화
 			                // 체크할 상품이 없는 경우
 			                if ($("input.chBox:checked").length === 0) {
-			                    alert("주문할 상품이 없습니다.");
+			                    alert("장바구니가 비어있습니다.");
 			                    return; // 함수 종료
 			                }
-			                checkAllBoxes(true); // 모든 체크박스 선택
 
 			                // 모든 체크박스 선택 후 confirm 창 띄우기
 			                setTimeout(function() {
