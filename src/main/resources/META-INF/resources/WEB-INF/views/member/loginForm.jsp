@@ -7,50 +7,47 @@
 	text-align: center;
 	margin: 0 auto;
 	display: flex;
-  	justify-content: center;
-  	padding: 0 auto;
+	justify-content: center;
+	padding: 0 auto;
+}
+.errorMessage {
+	color: red;
 }
 </style>
 <script type="text/javascript">
+	$(document).ready(function() {
 
+		/* // 로그인 서브밋
+		 $("form").on("submit", function() {
 
-		$(document).ready(function() {
-		<%-- 
-		// 로그인 서브밋
-		$("form").on("submit", function() {
+			var errorMessage = '${errorMessage}';
 
-		
-	 var errorMessage = "<%=request.getAttribute("errorMessage")%>
-	";
-			console.log(errorMessage);
 			// 에러 메시지가 존재하면 alert 창으로 표시
-			if (errorMessage) {
-				alert("메롱");
+			 if (errorMessage) {
+				alert(errorMessage);
 			}
-			this.action = "login"; // LoginController의 맵핑값
-			this.method = "post";
-			
-			
-			<!-- JavaScript를 이용하여 실패 시 알림 표시 -->
-			 // URL에 error 파라미터가 있으면 실패 메시지를 표시
-			 if (window.location.href.indexOf("error") > -1) {
-			 $('#alertMsg').show();
-			 }
-		});
- --%>
+		}); */
 
 		// 취소
 		$("#cancelButton").click(function() {
 			window.location.href = "/shop/main"; // /main 페이지로 리다이렉트
 		});// cancelButton
-		
+
 	});// ready()
 </script>
+
+<!-- 로그인 실패시 오류 메세지 띄우기 -->
+<c:if test="${not empty sessionScope.errorMessage}">
+	<div class="errorMessage">
+		<p>${sessionScope.errorMessage}</p>
+	</div>
+	<% session.removeAttribute("errorMessage"); %>
+</c:if>
 
 <div class="container" id="center">
 	<form action="auth" method="post" class="row g-3 m-4">
 		<div class="row mb-3" id="center">
-		<div>${errorMessage }</div>
+			<div>${errorMessage }</div>
 			<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 			<div class="col-auto">
 				<input type="text" class="form-control" id="userid" name="userid">

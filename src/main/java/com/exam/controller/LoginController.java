@@ -1,5 +1,7 @@
 package com.exam.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,13 +27,18 @@ public class LoginController {
 	}
 
 	@GetMapping(value = { "/login" })
-	public String loginForm() {
+	public String loginForm(HttpSession session) {
+		
 		return "loginForm";
 	}
 
 	@PostMapping(value = { "/login_fail" })
-	public String showlogin_failPage(ModelMap m) {
+	public String showlogin_failPage(HttpSession session) {
 		logger.info("logger:showlogin_failPage");
+		
+		String errorMessage = "아이디와 비밀번호를 확인해주세요!";
+		session.setAttribute("errorMessage", errorMessage);
+		
 		return "redirect:login";
 	}
 
