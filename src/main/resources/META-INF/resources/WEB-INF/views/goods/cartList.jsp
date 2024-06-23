@@ -5,107 +5,184 @@
 <head>
 <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document)
+			.ready(
+					function() {
 
-		// 체크박스 전체 선택 기능
-		$("#allCheck").click(function() {
-			var chk = $("#allCheck").prop("checked");
-			if (chk) {
-				$(".chBox").prop("checked", true);
-			} else {
-				$(".chBox").prop("checked", false);
-			}
-		});
+						function sumPrice() {
+							var totalPrice = 0;
+							$("input.chBox:checked")
+									.each(
+											function() {
+												var price = parseInt($(this)
+														.closest("tr").find(
+																".subtotal")
+														.text());
+												totalPrice += price;
+											});
 
-		// 체크박스 개별 선택하면 전체 선택 박스 해제되는 코드
-		$(".chBox").click(function() {
-			$("#allCheck").prop("checked", false);
-		});
+							$("td#totalPrice").text(totalPrice + "원"); // 총 결제할 금액을 표시하는 td 태그 업데이트
+						}
 
-		// 체크박스 선택 후 삭제 버튼 (개별 삭제 & 전체 삭제)
-		$("#selectDelete_btn").click(function() {
-			var confirm_val = confirm("선택하신 상품을 장바구니에서 삭제하시겠습니까?");
-			if (confirm_val) {
-				var checkArr = new Array();
+						// 체크박스 전체 선택 기능
+						$("#allCheck").click(function() {
+							var chk = $("#allCheck").prop("checked");
+							if (chk) {
+								$(".chBox").prop("checked", true);
+							} else {
+								$(".chBox").prop("checked", false);
+							}
 
-				$("input[class='chBox']:checked").each(function() {
-					checkArr.push($(this).attr("data-cartNum"));
-				});
+							sumPrice(); // 전체 선택 후 가격 합계 업데이트
+						});
 
-				var confirm_val = confirm("삭제되었습니다.");
+						// 체크박스 개별 선택하면 전체 선택 박스 해제되는 코드
+						$(".chBox").click(function() {
+							$("#allCheck").prop("checked", false);
+							sumPrice(); // 전체 선택 후 가격 합계 업데이트
+						});
 
-				$.ajax({
-					url : "/shop/deleteCart",
-					type : "post",
-					data : {
-						chbox : checkArr
-					},
-					success : function() {
-						location.href = "/shop/cartList";
-					}
-				});
-			}
-		});
+						// 체크박스 선택 후 삭제 버튼 (개별 삭제 & 전체 삭제)
+						$("#selectDelete_btn")
+								.click(
+										function() {
 
-		//선택한 상품만 주문할 페이지로 넘어가기
-		$("#orderAddSelected_btn").click(function() {
+											var checkArr = []; // 빈 배열로 초기화
 
-			var confirm_val = confirm("선택하신 상품을 주문하시겠습니까?");
-			if (confirm_val) {
-				var checkArr = new Array();
+											// 체크할 상품이 없는 경우
+											if ($("input[class='chBox']").length === 0) {
+												alert("삭제할 상품이 없습니다.");
+												return; // 함수 종료
+											}
 
-				$("input[class='chBox']:checked").each(function() {
-					checkArr.push($(this).attr("data-cartNum"));
-				});
+											var confirm_val = confirm("선택하신 상품을 장바구니에서 삭제하시겠습니까?");
+											if (confirm_val) {
 
-/* 				var confirm_val = confirm("선택 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
- */				
-				$.ajax({
-					url : "/shop/orderAddSelected",
-					type : "post",
-					data : {
-						chbox : checkArr
-					},
-					success : function() {
-						alert("선택 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
-						location.href = "/shop/orderList";
-					}
-				});
-			}
+												$(
+														"input[class='chBox']:checked")
+														.each(
+																function() {
+																	checkArr
+																			.push($(
+																					this)
+																					.attr(
+																							"data-cartNum"));
+																});
 
-		});
+												var confirm_val = confirm("삭제되었습니다.");
 
-		//장바구니 전체 주문하기
-		$("#AllToOrder_btn").click(function() {
+												$
+														.ajax({
+															url : "/shop/deleteCart",
+															type : "post",
+															data : {
+																chbox : checkArr
+															},
+															success : function() {
+																location.href = "/shop/cartList";
+															}
+														});
+											}
+										});
 
-			var confirm_val = confirm("전체 상품을 주문하시겠습니까?");
+						//선택한 상품만 주문할 페이지로 넘어가기
+						$("#orderAddSelected_btn")
+								.click(
+										function() {
 
-			if (confirm_val) {
-				var checkArr = new Array();
+											var checkArr = []; // 빈 배열로 초기화
 
-				$("input[class='chBox']").each(function() {
-					checkArr.push($(this).attr("data-cartNum"));
-				});
+											// 체크할 상품이 없는 경우
+											if ($("input[class='chBox']").length === 0) {
+												alert("주문할 상품이 없습니다.");
+												return; // 함수 종료
+											}
 
-				var confirm_val = confirm("전체 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
+											var confirm_val = confirm("선택하신 상품을 주문하시겠습니까?");
+											if (confirm_val) {
 
-				
-				$.ajax({
-					url : "/shop/orderAddById",
-					type : "post",
-					data : {
-						chbox : checkArr
-					},
-					success : function() {
-						location.href = "/shop/orderList";
-					}
+												$(
+														"input[class='chBox']:checked")
+														.each(
+																function() {
+																	checkArr
+																			.push($(
+																					this)
+																					.attr(
+																							"data-cartNum"));
+																});
 
-				});
-			}
+												$
+														.ajax({
+															url : "/shop/orderAddSelected",
+															type : "post",
+															data : {
+																chbox : checkArr
+															},
+															success : function() {
+																alert("선택 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
+																location.href = "/shop/orderList";
+															}
+														});
+											}
 
-		});
+										});
 
-	});
+						//장바구니 전체 주문하기
+						$("#AllToOrder_btn")
+								.click(
+										function() {
+
+											var checkArr = []; // 빈 배열로 초기화
+
+											// 체크할 상품이 없는 경우
+											if ($("input[class='chBox']").length === 0) {
+												alert("주문할 상품이 없습니다.");
+												return; // 함수 종료
+											}
+
+											var confirm_val = confirm("전체 상품을 주문하시겠습니까?");
+											if (confirm_val) {
+												$("input[class='chBox']")
+														.each(
+																function() {
+																	checkArr
+																			.push($(
+																					this)
+																					.attr(
+																							"data-cartNum"));
+																});
+
+												var confirm_val = confirm("전체 상품 주문 완료 \n ♡＼(´▽ `)ノ♡ ");
+
+												$
+														.ajax({
+															url : "/shop/orderAddById",
+															type : "post",
+															data : {
+																chbox : checkArr
+															},
+															success : function() {
+																location.href = "/shop/orderList";
+															}
+
+														});
+											}
+
+											// 페이지 로드 시 초기 합계 계산
+											sumPrice();
+										});
+
+						/* 
+						 // 각 체크박스 클릭 시 즉시 가격 업데이트
+						 $("input.chBox").click(function() {
+						 console.log("Checkbox clicked");
+
+						 sumPrice();
+						 }); */
+
+						// 페이지 로드 시 체크된 상품들의 총 가격 계산 및 표시
+					});
 </script>
 </head>
 
@@ -133,8 +210,9 @@
 
 						<!-- 변수 선언하기 -->
 						<c:set var="amount" value="${cartList.gAmount }" />
-						<c:set var="sum"
+						<%--<c:set var="sum"
 							value="${cartList.goodsList[0].gPrice * amount + sum}" />
+						 --%>
 						<tr>
 							<td><div class="checkBox">
 									<input type="checkbox" name="chBox" class="chBox"
@@ -146,16 +224,17 @@
 							<td>${cartList.goodsList[0].gName }</td>
 							<td>${cartList.goodsList[0].gPrice }</td>
 							<td>${cartList.gAmount }</td>
-							<td>${cartList.goodsList[0].gPrice * amount }</td>
+							<td class="subtotal">${cartList.goodsList[0].gPrice * amount }</td>
 						</tr>
+
+
 					</c:forEach>
 					<tr>
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td></td>
-						<td colspan="3"><b>총 주문 금액 : &nbsp; ${sum} 원</b></td>
+						<td colspan="2"><b>결제할 금액 : </b></td>
+						<td id="totalPrice"></td>
 					</tr>
 				</tbody>
 

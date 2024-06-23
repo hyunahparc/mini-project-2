@@ -35,6 +35,11 @@
 			}
 		})
 
+		$("#cant_order_btn").click(function() {
+			alert("장바구니에 담은 후 구매 가능합니다.");
+		});
+
+		
 		// 카트 서브밋
 		$("form").on("submit", function() {
 			//alert("cartAdd submit");
@@ -71,7 +76,7 @@
 						id="down">
 
 				</h6>
-				<a href="/shop/orderAddSelected" class="btn btn-primary mt-3">구매</a>
+				<button type="button" id="cant_order_btn"class="btn btn-primary mt-3">구매</a>
 				<button type="submit" class="btn btn-primary mt-3">장바구니</button>
 			</div>
 
