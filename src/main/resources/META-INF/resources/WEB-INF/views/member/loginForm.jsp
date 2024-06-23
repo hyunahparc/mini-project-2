@@ -26,7 +26,7 @@
 		        // 사용자에게 confirm 창을 띄우기
 		        var confirmSubmit = confirm("환영합니다!");
 
-		        // 사용자가 확인을 눌렀을 때 폼을 실제로 제출합니다.
+		        // 사용자가 확인 클릭 시 화면 전환
 		        if (confirmSubmit) {
 		            $(this).off("submit").submit(); // 폼 제출
 		            
